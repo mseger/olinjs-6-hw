@@ -1,0 +1,24 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+#ui-carousel-prev{
+	float:left;
+	font-size: 20px;
+}
+
+#ui-carousel-next{
+	float:right;
+	font-size: 20px;
+}
+
+#carousel{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
