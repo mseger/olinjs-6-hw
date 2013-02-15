@@ -12,7 +12,7 @@ exports.login = function (req, res) {
 		  		}else{
 		  			var pics_array = [];
 		  			for(var i=0; i<pics.data.length; i++){
-		  				pics_array.push(pics.data[i].source);
+		  				pics_array.push(pics.data[i]);
 		  			};
 		  			var loggedInUser = new FBUser({name: data.name, profPicURL: picData.data.url, profileBackground: "white", quotes: data.quotes, my_pics: pics_array});
 		  			loggedInUser.save(function (err){

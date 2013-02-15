@@ -47,6 +47,7 @@ app.get('/users/delete_all', FBUser.delete_all);
 // PUTS
 app.post('/login', Facebook.loginRequired({scope: scope}), FBUser.login);
 app.post('/logout', Facebook.loginRequired({scope: scope}), FBUser.logout);
+app.post('/comment/new', Facebook.loginRequired({scope: scope}), homepage.add_comment);
 
 
 http.createServer(app).listen(app.get('port'), function(){

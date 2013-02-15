@@ -2,18 +2,21 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
+
 
   div(id="carousel", value=curr_user)
-    img(src="#{curr_user.profPicURL}", id="profPic")
-    each pic_url, i in curr_user.my_pics
-      div(value=pic_url, id="picture_id")
-        img(src=pic_url, alt="")
+    each pic, i in curr_user.my_pics
+      img(src=pic.source, alt="")
+      form(name="comment", action="/comment/new", method="post")
+        | Comment
+        input(type="hidden", name="fbid", value= pic.id)
+        input(type="text", name="comment")
+        input(type="submit", value="comment_post")
 
   a(href="#", id="ui-carousel-prev", style="opacity: 1;") Prev
   a(href="#", id="ui-carousel-next", style="opacity: 1;") Next
   
     script(type='text/javascript')
         jQuery(function($){
-            $( "#carousel").rcarousel({auto: {enabled: "true"}, width: 400, height: 400, visible: 3, step: 1});
+            $( "#carousel").rcarousel({auto: {enabled: "true"}, width: 400, height: 400, visible: 2, step: 1});
         });
