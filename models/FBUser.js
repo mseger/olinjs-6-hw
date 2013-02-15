@@ -4,7 +4,8 @@ var FBUserSchema = new Schema({
 	name: String, 
 	profPicURL: String, 
 	profileBackground: String,
-	quotes: String
+	quotes: String,
+	my_pics: [String]
 });
 
 var FBUser = mongoose.model('FBUser', FBUserSchema);

@@ -34,16 +34,19 @@ app.configure('development', function(){
   mongoose.connect(process.env.MONGOLAB_URI || 'localhost');
 });
 
+// set a global variable for the permissions I want
+global.scope = ['user_photos', 'friends_photos', 'publish_stream'];
+
 // GETS
 app.get('/', homepage.loginLandingPage);
-app.get('/login', Facebook.loginRequired(), FBUser.login);
-app.get('/homepage', Facebook.loginRequired(), homepage.main);
+app.get('/login', Facebook.loginRequired({scope: scope}), FBUser.login);
+app.get('/homepage', Facebook.loginRequired({scope: scope}), homepage.main);
 app.get('/users/delete_all', FBUser.delete_all);
 
 
 // PUTS
-app.post('/login', Facebook.loginRequired(), FBUser.login);
-app.post('/logout', Facebook.loginRequired(), FBUser.logout);
+app.post('/login', Facebook.loginRequired({scope: scope}), FBUser.login);
+app.post('/logout', Facebook.loginRequired({scope: scope}), FBUser.logout);
 
 
 http.createServer(app).listen(app.get('port'), function(){
