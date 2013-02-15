@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+
+  div(id="carousel", value=curr_user)
+    img(src="#{curr_user.profPicURL}", id="profPic")
+    img(src= "images/ants.jpg", alt="")
+    img(src= "images/OG_logo.png", alt="")
+    img(src="images/OG_logo_2.png", alt="")
+    img(src= "images/ants.jpg", alt="")
+    img(src= "images/OG_logo.png", alt="")
+    img(src="images/OG_logo_2.png", alt="")
+    img(src= "images/ants.jpg", alt="")
+    img(src= "images/OG_logo.png", alt="")
+    img(src="images/OG_logo_2.png", alt="")
+
+  a(href="#", id="ui-carousel-prev", style="opacity: 1;") Prev
+  a(href="#", id="ui-carousel-next", style="opacity: 1;") Next
+  
+    script(type='text/javascript')
+        jQuery(function($){
+            $( "#carousel").rcarousel({auto: {enabled: "true"}, width: 200, height: 200, visible: 6, step: 1});
+        });

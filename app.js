@@ -4,8 +4,9 @@
  */
 
 var express = require('express')
-  , routes = require('./routes')
   , user = require('./routes/user')
+  , homepage = require('./routes/homepage')
+  , FBUser = require('./routes/FBUser')
   , http = require('http')
   , path = require('path')
   , mongoose = require('mongoose')
@@ -23,7 +24,7 @@ app.configure(function(){
   app.use(express.methodOverride());
   app.use(express.cookieParser('your secret here'));
   app.use(express.session());
-  app.use(Facebook.middleware({appId: '206734312806434', secret: '6a3b6cf9d62b81cfc941e515f5378787'}));
+  app.use(Facebook.middleware({appId: '480495895344412', secret: '969edafa9a66f9947050c80daad36d49'}));
   app.use(app.router);
   app.use(express.static(path.join(__dirname, 'public')));
 });
@@ -33,8 +34,17 @@ app.configure('development', function(){
   mongoose.connect(process.env.MONGOLAB_URI || 'localhost');
 });
 
-app.get('/', routes.index);
-app.get('/users', user.list);
+// GETS
+app.get('/', homepage.loginLandingPage);
+app.get('/login', Facebook.loginRequired(), FBUser.login);
+app.get('/homepage', Facebook.loginRequired(), homepage.main);
+app.get('/users/delete_all', FBUser.delete_all);
+
+
+// PUTS
+app.post('/login', Facebook.loginRequired(), FBUser.login);
+app.post('/logout', Facebook.loginRequired(), FBUser.logout);
+
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
